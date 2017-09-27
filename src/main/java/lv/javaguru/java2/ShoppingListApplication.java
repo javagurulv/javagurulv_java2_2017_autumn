@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class ShoppingListApplication {
 
+
+
+
     public static void main(String[] args) {
         // Use cases:
         // 1. Add product to list
