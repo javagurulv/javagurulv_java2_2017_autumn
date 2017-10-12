@@ -1,8 +1,20 @@
 package lv.javaguru.java2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import lv.javaguru.java2.ui.AddProductView;
+import lv.javaguru.java2.businesslogic.AddProductService;
+import lv.javaguru.java2.businesslogic.AddProductServiceImpl;
+import lv.javaguru.java2.ui.View;
+import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.database.InMemoryDatabase;
+import lv.javaguru.java2.ui.PrintShoppingListView;
+import lv.javaguru.java2.businesslogic.ProductListService;
+import lv.javaguru.java2.businesslogic.ProductListServiceImpl;
+import lv.javaguru.java2.ui.RemoveProductView;
+import lv.javaguru.java2.businesslogic.RemoveProductService;
+import lv.javaguru.java2.businesslogic.RemoveProductServiceImpl;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ShoppingListApplication {
@@ -17,75 +29,28 @@ public class ShoppingListApplication {
         // 3. Print shopping list to console
         // 4. Exit
 
-        List<Product> products = new ArrayList<>();
+        Database database = new InMemoryDatabase();
+
+        AddProductService addProductService = new AddProductServiceImpl(database);
+        RemoveProductService removeProductService = new RemoveProductServiceImpl(database);
+        ProductListService productListService = new ProductListServiceImpl(database);
+
+        Map<Integer, View> commands = new HashMap<>();
+        commands.put(1, new AddProductView(addProductService));
+        commands.put(2, new RemoveProductView(removeProductService));
+        commands.put(3, new PrintShoppingListView(productListService));
+
         while (true) {
             printProgramMenu();
             int menuItem = getFromUserMenuItemToExecute();
             if (menuItem == 4) {
                 break;
             }
-            switch (menuItem) {
-                case 1: {
-                    addProductToList(products);
-                    break;
-                }
-                case 2: {
-                    removeProductFromList(products);
-                    break;
-                }
-                case 3: {
-                    printShoppingListToConsole(products);
-                    break;
-                }
-            }
+
+            View view = commands.get(menuItem);
+            view.execute();
         }
 
-    }
-
-    private static void addProductToList(List<Product> products) {
-        System.out.println();
-        System.out.println("Add product to list execution start!");
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter product title:");
-        String title = sc.nextLine();
-        System.out.print("Enter product description:");
-        String description = sc.nextLine();
-        Product product = new Product();
-        product.setTitle(title);
-        product.setDescription(description);
-        products.add(product);
-        System.out.println("Add product to list execution end!");
-        System.out.println();
-    }
-
-    private static void removeProductFromList(List<Product> products) {
-        System.out.println();
-        System.out.println("Remove product from list execution start!");
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter product title:");
-        final String title = sc.nextLine();
-        Optional<Product> foundProduct = products.stream()
-                .filter(p -> p.getTitle().equals(title))
-                .findFirst();
-        if (foundProduct.isPresent()) {
-            System.out.println("Product with title " + title + " was found and will be removed from list!");
-            Product product = foundProduct.get();
-            products.remove(product);
-        } else {
-            System.out.println("Product with title " + title + " not found and not be removed from list!");
-        }
-        System.out.println("Remove product from list execution end!");
-        System.out.println();
-    }
-
-    private static void printShoppingListToConsole(List<Product> products) {
-        System.out.println();
-        System.out.println("Print shopping list to console execution start!");
-        for (Product product : products) {
-            System.out.println(product.getTitle() + "[" + product.getDescription() + "]");
-        }
-        System.out.println("Print shopping list to console execution end!");
-        System.out.println();
     }
 
     private static void printProgramMenu() {
