@@ -3,15 +3,15 @@ package lv.javaguru.java2.businesslogic.impl;
 import lv.javaguru.java2.businesslogic.AddProductService;
 import lv.javaguru.java2.businesslogic.api.AddProductRequest;
 import lv.javaguru.java2.businesslogic.api.AddProductResponse;
-import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.domain.Product;
 
 public class AddProductServiceImpl implements AddProductService {
 
-    private Database database;
+    private ProductDAO productDAO;
 
-    public AddProductServiceImpl(Database database) {
-        this.database = database;
+    public AddProductServiceImpl(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class AddProductServiceImpl implements AddProductService {
         Product product = new Product();
         product.setTitle(request.getTitle());
         product.setDescription(request.getDescription());
-        database.saveProduct(product);
+        productDAO.save(product);
         return new AddProductResponse(true);
     }
 

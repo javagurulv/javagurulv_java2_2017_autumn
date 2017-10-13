@@ -3,20 +3,29 @@ package lv.javaguru.java2.businesslogic.impl;
 import lv.javaguru.java2.businesslogic.RemoveProductService;
 import lv.javaguru.java2.businesslogic.api.RemoveProductRequest;
 import lv.javaguru.java2.businesslogic.api.RemoveProductResponse;
-import lv.javaguru.java2.database.Database;
+import lv.javaguru.java2.database.ProductDAO;
+import lv.javaguru.java2.domain.Product;
+
+import java.util.Optional;
 
 public class RemoveProductServiceImpl implements RemoveProductService {
 
-    private Database database;
+    private ProductDAO productDAO;
 
-    public RemoveProductServiceImpl(Database database) {
-        this.database = database;
+    public RemoveProductServiceImpl(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     @Override
     public RemoveProductResponse removeByTitle(RemoveProductRequest request) {
-        boolean removed = database.removeProductByTitle(request.getTitle());
-        return new RemoveProductResponse(removed);
+        Optional<Product> productOpt = productDAO.getByTitle(request.getTitle());
+        if(productOpt.isPresent()) {
+            Product product = productOpt.get();
+            productDAO.delete(product);
+            return new RemoveProductResponse(true);
+        } else {
+            return new RemoveProductResponse(false);
+        }
     }
 
 }

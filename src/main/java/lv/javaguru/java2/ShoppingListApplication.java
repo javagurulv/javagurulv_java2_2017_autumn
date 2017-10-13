@@ -1,17 +1,17 @@
 package lv.javaguru.java2;
 
-import lv.javaguru.java2.ui.AddProductView;
 import lv.javaguru.java2.businesslogic.AddProductService;
-import lv.javaguru.java2.businesslogic.impl.AddProductServiceImpl;
-import lv.javaguru.java2.ui.View;
-import lv.javaguru.java2.database.Database;
-import lv.javaguru.java2.database.InMemoryDatabase;
-import lv.javaguru.java2.ui.PrintShoppingListView;
 import lv.javaguru.java2.businesslogic.ProductListService;
-import lv.javaguru.java2.businesslogic.impl.ProductListServiceImpl;
-import lv.javaguru.java2.ui.RemoveProductView;
 import lv.javaguru.java2.businesslogic.RemoveProductService;
+import lv.javaguru.java2.businesslogic.impl.AddProductServiceImpl;
+import lv.javaguru.java2.businesslogic.impl.ProductListServiceImpl;
 import lv.javaguru.java2.businesslogic.impl.RemoveProductServiceImpl;
+import lv.javaguru.java2.database.ProductDAO;
+import lv.javaguru.java2.database.jdbc.ProductDAOImpl;
+import lv.javaguru.java2.ui.AddProductView;
+import lv.javaguru.java2.ui.PrintShoppingListView;
+import lv.javaguru.java2.ui.RemoveProductView;
+import lv.javaguru.java2.ui.View;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +26,11 @@ public class ShoppingListApplication {
         // 3. Print shopping list to console
         // 4. Exit
 
-        Database database = new InMemoryDatabase();
+        ProductDAO productDAO = new ProductDAOImpl();
 
-        AddProductService addProductService = new AddProductServiceImpl(database);
-        RemoveProductService removeProductService = new RemoveProductServiceImpl(database);
-        ProductListService productListService = new ProductListServiceImpl(database);
+        AddProductService addProductService = new AddProductServiceImpl(productDAO);
+        RemoveProductService removeProductService = new RemoveProductServiceImpl(productDAO);
+        ProductListService productListService = new ProductListServiceImpl(productDAO);
 
         Map<Integer, View> commands = new HashMap<>();
         commands.put(1, new AddProductView(addProductService));

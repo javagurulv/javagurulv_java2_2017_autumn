@@ -19,7 +19,7 @@ Lesson 2:
 2. Implement each menu step in separate class
 3. Introduce Strategy design pattern
 4. Introduce three layer application architecture:
-   UI, Business Logic, Data Access Layer (in memory database)
+   UI, Business Logic, Data Access Layer (in memory productDAO)
 
 Lesson 3:
 5. Rename commands to views - they represent UI layer.
