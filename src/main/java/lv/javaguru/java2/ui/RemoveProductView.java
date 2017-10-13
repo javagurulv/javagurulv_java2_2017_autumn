@@ -1,6 +1,7 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.businesslogic.RemoveProductResponse;
+import lv.javaguru.java2.businesslogic.api.RemoveProductRequest;
+import lv.javaguru.java2.businesslogic.api.RemoveProductResponse;
 import lv.javaguru.java2.businesslogic.RemoveProductService;
 
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class RemoveProductView implements View {
         final String title = sc.nextLine();
 
         // BL
-        RemoveProductResponse response = removeProductService.removeByTitle(title);
+        RemoveProductResponse response = removeProductService.removeByTitle(new RemoveProductRequest(title));
         // End of BL
 
         if (response.isRemoved()) {

@@ -1,4 +1,4 @@
-package lv.javaguru.java2.businesslogic;
+package lv.javaguru.java2.businesslogic.api;
 
 import lv.javaguru.java2.domain.Product;
 

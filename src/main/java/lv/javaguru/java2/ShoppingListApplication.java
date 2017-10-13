@@ -2,25 +2,22 @@ package lv.javaguru.java2;
 
 import lv.javaguru.java2.ui.AddProductView;
 import lv.javaguru.java2.businesslogic.AddProductService;
-import lv.javaguru.java2.businesslogic.AddProductServiceImpl;
+import lv.javaguru.java2.businesslogic.impl.AddProductServiceImpl;
 import lv.javaguru.java2.ui.View;
 import lv.javaguru.java2.database.Database;
 import lv.javaguru.java2.database.InMemoryDatabase;
 import lv.javaguru.java2.ui.PrintShoppingListView;
 import lv.javaguru.java2.businesslogic.ProductListService;
-import lv.javaguru.java2.businesslogic.ProductListServiceImpl;
+import lv.javaguru.java2.businesslogic.impl.ProductListServiceImpl;
 import lv.javaguru.java2.ui.RemoveProductView;
 import lv.javaguru.java2.businesslogic.RemoveProductService;
-import lv.javaguru.java2.businesslogic.RemoveProductServiceImpl;
+import lv.javaguru.java2.businesslogic.impl.RemoveProductServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class ShoppingListApplication {
-
-
-
 
     public static void main(String[] args) {
         // Use cases:

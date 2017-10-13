@@ -1,6 +1,6 @@
 package lv.javaguru.java2.ui;
 
-import lv.javaguru.java2.businesslogic.ProductListResponse;
+import lv.javaguru.java2.businesslogic.api.ProductListResponse;
 import lv.javaguru.java2.businesslogic.ProductListService;
 import lv.javaguru.java2.domain.Product;
 

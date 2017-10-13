@@ -1,5 +1,6 @@
 package lv.javaguru.java2.ui;
 
+import lv.javaguru.java2.businesslogic.api.AddProductRequest;
 import lv.javaguru.java2.businesslogic.AddProductService;
 
 import java.util.Scanner;
@@ -22,9 +23,8 @@ public class AddProductView implements View {
         System.out.print("Enter product description:");
         String description = sc.nextLine();
 
-
         /////// Business Logic
-        addProductService.addProduct(title, description);
+        addProductService.addProduct(new AddProductRequest(title, description));
         /////// End of Business Logic
 
         System.out.println("Add product to list execution end!");
