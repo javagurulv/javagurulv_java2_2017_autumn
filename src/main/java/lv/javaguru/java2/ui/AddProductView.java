@@ -2,16 +2,16 @@ package lv.javaguru.java2.ui;
 
 import lv.javaguru.java2.businesslogic.api.AddProductRequest;
 import lv.javaguru.java2.businesslogic.AddProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class AddProductView implements View {
 
+    @Autowired
     private AddProductService addProductService;
-
-    public AddProductView(AddProductService addProductService) {
-        this.addProductService = addProductService;
-    }
 
     @Override
     public void execute() {

@@ -3,14 +3,14 @@ package lv.javaguru.java2.ui;
 import lv.javaguru.java2.businesslogic.api.ProductListResponse;
 import lv.javaguru.java2.businesslogic.ProductListService;
 import lv.javaguru.java2.domain.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PrintShoppingListView implements View {
 
+    @Autowired
     private ProductListService productListService;
-
-    public PrintShoppingListView(ProductListService productListService) {
-        this.productListService = productListService;
-    }
 
     @Override
     public void execute() {

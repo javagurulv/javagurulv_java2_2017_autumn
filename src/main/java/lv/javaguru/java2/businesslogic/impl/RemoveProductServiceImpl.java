@@ -5,16 +5,16 @@ import lv.javaguru.java2.businesslogic.api.RemoveProductRequest;
 import lv.javaguru.java2.businesslogic.api.RemoveProductResponse;
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.domain.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-public class RemoveProductServiceImpl implements RemoveProductService {
+@Component
+class RemoveProductServiceImpl implements RemoveProductService {
 
+    @Autowired
     private ProductDAO productDAO;
-
-    public RemoveProductServiceImpl(ProductDAO productDAO) {
-        this.productDAO = productDAO;
-    }
 
     @Override
     public RemoveProductResponse removeByTitle(RemoveProductRequest request) {

@@ -1,17 +1,12 @@
 package lv.javaguru.java2;
 
-import lv.javaguru.java2.businesslogic.AddProductService;
-import lv.javaguru.java2.businesslogic.ProductListService;
-import lv.javaguru.java2.businesslogic.RemoveProductService;
-import lv.javaguru.java2.businesslogic.impl.AddProductServiceImpl;
-import lv.javaguru.java2.businesslogic.impl.ProductListServiceImpl;
-import lv.javaguru.java2.businesslogic.impl.RemoveProductServiceImpl;
-import lv.javaguru.java2.database.ProductDAO;
-import lv.javaguru.java2.database.jdbc.ProductDAOImpl;
+import lv.javaguru.java2.configs.SpringAppConfig;
 import lv.javaguru.java2.ui.AddProductView;
 import lv.javaguru.java2.ui.PrintShoppingListView;
 import lv.javaguru.java2.ui.RemoveProductView;
 import lv.javaguru.java2.ui.View;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,22 +15,13 @@ import java.util.Scanner;
 public class ShoppingListApplication {
 
     public static void main(String[] args) {
-        // Use cases:
-        // 1. Add product to list
-        // 2. Remove product from list
-        // 3. Print shopping list to console
-        // 4. Exit
-
-        ProductDAO productDAO = new ProductDAOImpl();
-
-        AddProductService addProductService = new AddProductServiceImpl(productDAO);
-        RemoveProductService removeProductService = new RemoveProductServiceImpl(productDAO);
-        ProductListService productListService = new ProductListServiceImpl(productDAO);
+        ApplicationContext applicationContext
+                = new AnnotationConfigApplicationContext(SpringAppConfig.class);
 
         Map<Integer, View> commands = new HashMap<>();
-        commands.put(1, new AddProductView(addProductService));
-        commands.put(2, new RemoveProductView(removeProductService));
-        commands.put(3, new PrintShoppingListView(productListService));
+        commands.put(1, applicationContext.getBean(AddProductView.class));
+        commands.put(2, applicationContext.getBean(RemoveProductView.class));
+        commands.put(3, applicationContext.getBean(PrintShoppingListView.class));
 
         while (true) {
             printProgramMenu();

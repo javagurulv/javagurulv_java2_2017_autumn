@@ -3,16 +3,16 @@ package lv.javaguru.java2.ui;
 import lv.javaguru.java2.businesslogic.api.RemoveProductRequest;
 import lv.javaguru.java2.businesslogic.api.RemoveProductResponse;
 import lv.javaguru.java2.businesslogic.RemoveProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class RemoveProductView implements View {
 
+    @Autowired
     private RemoveProductService removeProductService;
-
-    public RemoveProductView(RemoveProductService removeProductService) {
-        this.removeProductService = removeProductService;
-    }
 
     @Override
     public void execute() {

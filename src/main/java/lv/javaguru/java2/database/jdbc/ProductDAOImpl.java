@@ -3,6 +3,7 @@ package lv.javaguru.java2.database.jdbc;
 import lv.javaguru.java2.database.DBException;
 import lv.javaguru.java2.database.ProductDAO;
 import lv.javaguru.java2.domain.Product;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +14,8 @@ import java.util.Optional;
 
 import static lv.javaguru.java2.domain.ProductBuilder.createProduct;
 
-public class ProductDAOImpl extends DAOImpl implements ProductDAO {
+@Component
+class ProductDAOImpl extends DAOImpl implements ProductDAO {
 
     @Override
     public Product save(Product product) throws DBException {
