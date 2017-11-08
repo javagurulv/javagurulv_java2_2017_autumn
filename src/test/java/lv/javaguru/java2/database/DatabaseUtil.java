@@ -11,7 +11,7 @@ public class DatabaseUtil extends DAOImpl {
 
     public void cleanDatabase() throws DBException {
         for(String tableName : getTableNames()) {
-            Connection connection = getConnection();
+            Connection connection = null;
             try {
                 connection = getConnection();
                 String sql = "delete from " + tableName;
